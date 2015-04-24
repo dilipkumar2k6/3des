@@ -20,22 +20,20 @@ public class TripleDes {
 			String desAlgoName = getDESAlgorithmName(ALGO_NAME);
 			// Create Cipher object
 			Cipher cipher = Cipher.getInstance(ALGO_NAME);
+			//Actual DES algo needs 56 bits key, which is equivalent to 1byte (0 at 0th position)  Get 8*3 byets key
+			byte [] key = hexFromString(SHARED_KEY);
+			System.out.println("DES Algorithm  shared key size in bytes >> "+key.length);
 			// Create SecretKeySpec
-			SecretKeySpec secretKeySpec = new SecretKeySpec(hexFromString(SHARED_KEY), desAlgoName);
-			//Encrypt string
-			String encrypted= encrypt(cipher, secretKeySpec, PLAIN_TEXT.getBytes(), 0, PLAIN_TEXT.getBytes().length);
-			System.out.println(encrypted);
+			SecretKeySpec secretKeySpec = new SecretKeySpec(key, desAlgoName);
+			//Encrypt bytes
+			byte [] encryptedBytes = encryptIntoBytes(cipher, secretKeySpec, PLAIN_TEXT.getBytes(), 0, PLAIN_TEXT.getBytes().length);
+			String encryptedString=  hexToString(encryptedBytes);
+			System.out.println(encryptedString);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public static String encrypt(Cipher cipher, SecretKeySpec secretKeySpec, byte[] dct, int offset, int len) throws GeneralSecurityException {
-		System.out.println("encrypt offset >> "+offset+", len >> "+len);
-		byte[] ect = encryptIntoBytes(cipher, secretKeySpec, dct, offset, len);
-		return hexToString(ect);
 	}
 
 	public static byte[] encryptIntoBytes(Cipher cipher, SecretKeySpec secretKeySpec, byte[] dct, int offset, int len) throws GeneralSecurityException {
