@@ -1,18 +1,3 @@
-/**
- * Module: jumpstart
- *
- * --------------------------------------------------------------------------
- *
- * (C) Copyright 2014 American Express, Inc. All rights reserved.
- * The contents of this file represent American Express trade secrets and
- * are confidential. Use outside of American Express is prohibited and in
- * violation of copyright law.  Licence information of all dependent modules
- * can be found https://stash.mps.intra.aexp.com/projects/WF/repos/jumpstart-engine/browse/README.md
- *
- *
- * Description: jumpstart - <DESC_HERE>
- */
-
 'use strict';
 /*
  *  Offers related services.
